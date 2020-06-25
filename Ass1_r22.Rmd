@@ -43,26 +43,43 @@ where $Y_i=0$ or $1$
 \begin{enumerate}[label=(\alph*)]
   \item For a probability function to belong to the exponential family of distributions, it must follow the formula:
   \begin{align*}
-    f(y;\theta,\phi)=K(y,\frac{p}{\phi})\exp(\frac{p}{\phi}\{y\theta-c(\theta)\})
+    f(y;\theta,\phi)=K(y,\frac{p}{\phi})\exp\left(\frac{p}{\phi}\{y\theta-c(\theta)\}\right)
   \end{align*}
   For the given probability density function:
   \begin{align*}
     f(y;\pi) &= \pi_i^{y}(1-\pi_i)^{1-y} \\
-    &= \exp(\log\pi_i^{y}(1-\pi_i)^{1-y}) \\
-    &= \exp(\log\pi_i^{y}+\log(1-\pi_i)^{1-y})) \\
-    &= \exp(y\log\pi_i+(1-y)\log(1-\pi_i)) \\
-    &= \exp(y\log(\frac{\pi}{1-\pi})+\log(1-\pi)) \\
+    &= \exp\left(\log\pi_i^{y}(1-\pi_i)^{1-y}\right) \\
+    &= \exp\left(\log\pi_i^{y}+\log(1-\pi_i)^{1-y})\right) \\
+    &= \exp\left(y\log\pi_i+(1-y)\log(1-\pi_i)\right) \\
+    &= \exp\left(y\log(\frac{\pi}{1-\pi})+\log(1-\pi)\right) \\
   \end{align*}
   With $p=1$ and $\phi=1$, the above equation follows the form of the exponential family of distribution where
-  $K(y,\frac{p}{\phi})=1$, $\theta=\log(\frac{\pi}{1-\pi})$ and $c(\theta)=\log(1-\pi)$
-  \item
-  \item
-  \item
-  \item
-  \item
+  $K(y,\frac{p}{\phi})=1$, $\theta=\log(\frac{\pi}{1-\pi})$ and $c(\theta)=-\log(1-\pi)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$ where $\pi=\frac{e^{\theta}}{1+e^{\theta}}$
+  \item As seen in 2a, the naturalised parameter is $\theta=\log(\frac{\pi}{1-\pi})$
+  \item As seen in 2a, the cumulant generator is $c(\theta)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$.
+  Since $\text{E}[Y]=c^\prime(\theta)$,
+  $c^\prime(\theta)=-(\frac{e^\theta}{1+e^\theta})=-(-\pi)=\pi$.
+  Therefore, $\text{E}[Y]=\pi$.
+  \item Given the link function
+  \begin{align*}
+    g(\pi)=\log(\frac{\pi}{1-\pi})=e^{x^{T}\beta}
+  \end{align*}
+  it can be rearranged in terms of the probability $\pi$,
+  \begin{align*}
+    e^{x^{T}\beta}&=\log(\frac{\pi}{1-\pi}) \\
+    e^{x^{T}\beta}-\pi e^{x^{T}\beta}&=\pi \\
+    \pi &= \frac{e^{x^{T}\beta}}{1+e^{x^{T}\beta}}
+  \end{align*}
+  \item INSERT GRAPH 
+  
+  It shows the log odds of the insecticide working at a given probability?
+  \item The following probability density function 
+  \begin{align*}
+    f(y;\theta)=\frac{1}{\phi}\exp\left(\frac{(y-\theta)}{\phi}-\exp\left[\frac{(y-\theta)}{\phi}\right]\right)
+  \end{align*}
+  is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family.
 \end{enumerate}
 
-\begin
 
 ## Question 3
 
