@@ -1,0 +1,102 @@
+---
+title: "MATH3821 Assignment 1"
+author: "Stephen Sung"
+output: pdf_document
+header-includes:
+  - \usepackage{enumitem}
+  - \usepackage{amsmath}
+  - \usepackage{amsfonts}
+  - \usepackage{graphicx}
+  - \usepackage{hyperref}
+  - \usepackage{bbm}
+  - \usepackage{nccmath}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+## Question 2
+
+Given \textit{n} independent binary random variables $Y_1 \cdots Y_n$ with
+\begin{align*}
+  P(Y_i=1)=\pi_i \text{  and  } P(Y_i=0)=1-\pi_i 
+\end{align*} 
+The probability function of $Y_i$ is:
+\begin{align*}
+  \pi_i^{Y_i}(1-\pi_i)^{1-Y_i}
+\end{align*} 
+where $Y_i=0$ or $1$
+
+\begin{enumerate}[label=(\alph*)]
+  \item For a probability function to belong to the exponential family of distributions, it must follow the formula:
+  \begin{align*}
+    f(y;\theta,\phi)=K(y,\frac{p}{\phi})\exp(\frac{p}{\phi}\{y\theta-c(\theta)\})
+  \end{align*}
+  For the given probability density function:
+  \begin{align*}
+    f(y;\pi) &= \pi_i^{y}(1-\pi_i)^{1-y} \\
+    &= \exp(\log\pi_i^{y}(1-\pi_i)^{1-y}) \\
+    &= \exp(\log\pi_i^{y}+\log(1-\pi_i)^{1-y})) \\
+    &= \exp(y\log\pi_i+(1-y)\log(1-\pi_i)) \\
+    &= \exp(y\log(\frac{\pi}{1-\pi})+\log(1-\pi)) \\
+  \end{align*}
+  With $p=1$ and $\phi=1$, the above equation follows the form of the exponential family of distribution where
+  $K(y,\frac{p}{\phi})=1$, $\theta=\log(\frac{\pi}{1-\pi})$ and $c(\theta)=\log(1-\pi)$
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+\begin
+
+## Question 3
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+## Question 4
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+## Question 5
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+  \item
+  \item
+  \item
+\end{enumerate}
+
+
+
+
