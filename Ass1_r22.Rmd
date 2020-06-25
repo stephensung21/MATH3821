@@ -18,10 +18,33 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Question 1
 
+For Simple Linear Regression model $y_i=\beta_0+\beta_1 x_i + \epsilon_i$ where $\epsilon_i \sim N(0,\sigma^2)$
+
 \begin{enumerate}[label=(\alph*)]
-  \item
-  \item
-  \item
+  \item Let $\beta_0 = \alpha - \beta_1 \bar{x}$. Then the SLR model can be expressed as $y_i=\alpha+\beta_1(x_i-\bar{x})+\epsilon_i$.
+  \item $\alpha$ is the intercept of the new model?
+  \item 
+  To find the closed form formula of the LSE, 
+  \begin{align}
+    RSS(\beta_1) &= \sum_{i=1}^{n} [y_i-(\alpha+\beta_1(x_i-\bar{x}))]^2 \nonumber \\
+    \frac{\text{d}RSS(\beta_1)}{\text{d}\alpha} &= -2 \sum_{i=1}^{n} (y_i-(\alpha+\beta_1(x_i-\bar{x})))\\
+    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n} \left(y_i-(\alpha+\beta_1(x_i-\bar{x}))(x_i -\bar{x})\right)  
+  \end{align}
+  Let Equation $(1) = 0$
+  \begin{align*}
+    &-2 \sum_{i=1}^{n} (y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x}))) = 0 \\
+    &\sum_{i=1}^{n} y_i - \sum_{i=1}^{n} \hat{\alpha_i} - \sum_{i=1}^{n} \hat{\beta_1}x_i + \sum_{i=1}^{n} \hat{\beta_1}\bar{x} = 0 \\
+   & n \hat{\alpha_i} = \sum_{i=1}^{n} y_i - \hat{\beta_1} \sum_{i=1}^{n}x_i + n\hat{\beta_1}\bar{x} \\
+    &\hat{\alpha_i} = \frac{1}{n}\sum_{i=1}^{n} y_i -\hat{\beta_1}\bar{x}+\hat{\beta_1}\bar{x} \\
+    &\hat{\alpha_i} = \bar{y}
+  \end{align*}
+  Let Equation $(2) = 0$ 
+  \begin{align*}
+    &-2 \sum_{i=1}^{n} \left(y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x}))(x_i -\bar{x})\right) = 0 \\
+    &\sum_{i=1}^{n} y_i(x_i-\bar{x})-\sum_{i=1}^{n}\hat{\alpha}(x_i-\bar{x}) -\sum_{i=1}^{n} \hat{\beta_1}(x_i-\bar{x})^2 = 0 \\
+    &\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})^2 = \sum_{i=1}^{n} (y_i-\hat{\alpha})(x_i-\bar{x}) \\ \intertext{since $\hat{\alpha} = \bar{y}$}
+    &\hat{\beta_1} = \frac{\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}
+  \end{align*}
   \item
   \item
   \item
