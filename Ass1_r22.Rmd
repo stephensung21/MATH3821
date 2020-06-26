@@ -57,9 +57,46 @@ d)
   \end{align*}
   Therefore $Var[\hat{\alpha}] = \frac{\sigma^2}{n}$. \
   \
-  We note that $\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})=\sum_{i=1}^{n} (x_i-\bar{x})y_i$
+  We note that $\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})=\sum_{i=1}^{n} (x_i-\bar{x})y_i$, since
+  \begin{align*}
+    &\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x}) = \sum_{i=1}^{n} y_i(x_i-\bar{x}) - \sum_{i=1}^{n} \bar{y}(x_i-\bar{x}) \\ \intertext{and we notice that}
+    &\sum_{i=1}^{n} (x_i-\bar{x}) = \sum_{i=1}^{n} x_i - \frac{1}{n}n\sum_{i=1}^{n} x_i = 0
+  \end{align*}
+  To calculate $Var[\hat{\beta_1}]$,
+  \begin{align*}
+    Var[\hat{\beta_1}]&=Var\left[\frac{\sum_{i=1}^{n} (x_i-\bar{x})y_i}{\sum_{i=1}^{n} (x_i-\bar{x})^2}\right] \\
+    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2} Var\left[\sum_{i=1}^{n}(x_i-\bar{x})y_i\right] \\
+    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} Var\left[(x_i-\bar{x})y_i\right] \\
+    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} (x_i-\bar{x}) Var\left[y_i\right] \\
+    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} (x_i-\bar{x}) \sigma^2 \\
+    &= \frac{\sigma^2}{\sum_{i=1}^{n} (x_i-\bar{x})^2}
+  \end{align*}
+  Let $S_{xx}=\sum_{i=1}^{n} (x_i-\bar{x})^2$ and $S_{xy}=\sum_{i=1}^{n} (x_i-\bar{x})y_i$.
+  \
+  To calculate $Cov[\hat{\alpha},\hat{\beta_1]}$
+  \begin{align*}
+    Cov[\hat{\alpha},\hat{\beta_1]} &= Cov[\bar{y},\hat{\beta_1}] \\
+    &= Cov\left[\bar{y},\frac{S_{xy}}{S_{xx}}\right] \\
+    &= \frac{1}{S_{xx}}Cov\left[\bar{y},S_{xy}\right] \\
+    &= \frac{1}{S_{xx}}Cov\left[\frac{1}{n}\sum_{i=1}^{n}y,S_{xy}\right] \\
+    &= \frac{1}{n S_{xx}}Cov\left[ \sum_{i=1}^{n} y, \sum_{j=1}^{n} (x_j-\bar{x})y_j)\right] \\
+    &= \frac{1}{n S_{xx}} \sum_{i=1}^{n} \sum_{j=1}^{n} (x_j-\bar{x}) Cov[ y_i,y_j] \\
+    &= \frac{1}{n S_{xx}} \sum_{i=j}^{n} (x_i-\bar{x}) \sigma^2 \\
+    &= 0
+  \end{align*}
   
+e) 
+```{r}
+set.seed(1234567)
+x = runif(1000)
+eps = rnorm(1000)
+y = 5 + 10*x + eps
+```
 
+f)
+
+g)
+  
 ## Question 2
 Given \textit{n} independent binary random variables $Y_1 \cdots Y_n$ with
 \begin{align*}
