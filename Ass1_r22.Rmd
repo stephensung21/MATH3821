@@ -18,17 +18,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Question 1
 
-For Simple Linear Regression model $y_i=\beta_0+\beta_1 x_i + \epsilon_i$ where $\epsilon_i \sim N(0,\sigma^2)$
+For Simple Linear Regression model $y_i=\beta_0+\beta_1 x_i + \epsilon_i$ where $\epsilon_i \sim N(0,\sigma^2)$.
 
-\begin{enumerate}[label=(\alph*)]
-  \item Let $\beta_0 = \alpha - \beta_1 \bar{x}$. Then the SLR model can be expressed as $y_i=\alpha+\beta_1(x_i-\bar{x})+\epsilon_i$.
-  \item $\alpha$ is the intercept of the new model?
-  \item 
-  To find the closed form formula of the LSE, 
-  \begin{align}
+a) Let $\beta_0 = \alpha - \beta_1 \bar{x}$. Then the SLR model can be expressed as $y_i=\alpha+\beta_1(x_i-\bar{x})+\epsilon_i$.
+
+b) $\alpha$ is the intercept of the new model?
+
+c) To find the closed form formula of the LSE,
+\begin{align}
     RSS(\beta_1) &= \sum_{i=1}^{n} [y_i-(\alpha+\beta_1(x_i-\bar{x}))]^2 \nonumber \\
     \frac{\text{d}RSS(\beta_1)}{\text{d}\alpha} &= -2 \sum_{i=1}^{n} (y_i-(\alpha+\beta_1(x_i-\bar{x})))\\
-    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n} \left(y_i-(\alpha+\beta_1(x_i-\bar{x}))(x_i -\bar{x})\right)  
+    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n}   \left(y_i-(\alpha+\beta_1(x_i-\bar{x}))(x_i -\bar{x})\right)  
   \end{align}
   Let Equation $(1) = 0$
   \begin{align*}
@@ -45,14 +45,22 @@ For Simple Linear Regression model $y_i=\beta_0+\beta_1 x_i + \epsilon_i$ where 
     &\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})^2 = \sum_{i=1}^{n} (y_i-\hat{\alpha})(x_i-\bar{x}) \\ \intertext{since $\hat{\alpha} = \bar{y}$}
     &\hat{\beta_1} = \frac{\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}
   \end{align*}
-  \item
-  \item
-  \item
-  \item
-\end{enumerate}
+
+d) 
+  \begin{align*}
+    Var[\hat{\alpha}] &= Var\left[ \frac{1}{n} \sum_{i=1}^{n} y_i \right] \\
+    &= \frac{1}{n^2} Var \left[ \sum_{i=1}^{n} y_i \right] \\ \intertext{Since all $y_i$'s are uncorrelated}
+    &= \frac{1}{n^2} \sum_{i=1}^{n} Var [y_i] \\
+    &= \frac{1}{n^2} \sum_{i=1}^{n} \sigma^2 \\
+    &= \frac{n \sigma^2}{n^2} \\
+    &= \frac{\sigma^2}{n} \\
+  \end{align*}
+  Therefore $Var[\hat{\alpha}] = \frac{\sigma^2}{n}$. \
+  \
+  We note that $\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})=\sum_{i=1}^{n} (x_i-\bar{x})y_i$
+  
 
 ## Question 2
-
 Given \textit{n} independent binary random variables $Y_1 \cdots Y_n$ with
 \begin{align*}
   P(Y_i=1)=\pi_i \text{  and  } P(Y_i=0)=1-\pi_i 
@@ -63,9 +71,9 @@ The probability function of $Y_i$ is:
 \end{align*} 
 where $Y_i=0$ or $1$
 
-\begin{enumerate}[label=(\alph*)]
-  \item For a probability function to belong to the exponential family of distributions, it must follow the formula:
-  \begin{align*}
+a) For a probability function to belong to the exponential family of distributions, it must follow the formula:
+
+ \begin{align*}
     f(y;\theta,\phi)=K(y,\frac{p}{\phi})\exp\left(\frac{p}{\phi}\{y\theta-c(\theta)\}\right)
   \end{align*}
   For the given probability density function:
@@ -77,14 +85,15 @@ where $Y_i=0$ or $1$
     &= \exp\left(y\log(\frac{\pi}{1-\pi})+\log(1-\pi)\right) \\
   \end{align*}
   With $p=1$ and $\phi=1$, the above equation follows the form of the exponential family of distribution where
-  $K(y,\frac{p}{\phi})=1$, $\theta=\log(\frac{\pi}{1-\pi})$ and $c(\theta)=-\log(1-\pi)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$ where $\pi=\frac{e^{\theta}}{1+e^{\theta}}$
-  \item As seen in 2a, the naturalised parameter is $\theta=\log(\frac{\pi}{1-\pi})$
-  \item As seen in 2a, the cumulant generator is $c(\theta)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$.
+  $K(y,\frac{p}{\phi})=1$, $\theta=\log(\frac{\pi}{1-\pi})$ and $c(\theta)=-\log(1-\pi)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$ where $\pi=\frac{e^{\theta}}{1+e^{\theta}}$.
+  
+b) As seen in 2a, the naturalised parameter is $\theta=\log(\frac{\pi}{1-\pi})$
+c) As seen in 2a, the cumulant generator is $c(\theta)=-\log(1-\frac{e^{\theta}}{1+e^{\theta}})$.
   Since $\text{E}[Y]=c^\prime(\theta)$,
   $c^\prime(\theta)=-(\frac{e^\theta}{1+e^\theta})=-(-\pi)=\pi$.
   Therefore, $\text{E}[Y]=\pi$.
-  \item Given the link function
-  \begin{align*}
+d) Given the link function:
+\begin{align*}
     g(\pi)=\log(\frac{\pi}{1-\pi})=e^{x^{T}\beta}
   \end{align*}
   it can be rearranged in terms of the probability $\pi$,
@@ -93,50 +102,17 @@ where $Y_i=0$ or $1$
     e^{x^{T}\beta}-\pi e^{x^{T}\beta}&=\pi \\
     \pi &= \frac{e^{x^{T}\beta}}{1+e^{x^{T}\beta}}
   \end{align*}
-  \item INSERT GRAPH 
-  
-  It shows the log odds of the insecticide working at a given probability?
-  \item The following probability density function 
-  \begin{align*}
+e) 
+```{r}
+curve(exp(1+x)/(1+exp(1+x)), xlim = c(-5, 5), ylim = c(0, 1), main=expression(paste("Sampled values, ", mu, "=5, ", sigma,
+    "=1")))
+```
+It shows the log odds of the insecticide working with a given probability?
+
+f) The following probability density function:
+\begin{align*}
     f(y;\theta)=\frac{1}{\phi}\exp\left(\frac{(y-\theta)}{\phi}-\exp\left[\frac{(y-\theta)}{\phi}\right]\right)
   \end{align*}
   is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family.
-\end{enumerate}
-
-
-## Question 3
-
-\begin{enumerate}[label=(\alph*)]
-  \item
-  \item
-  \item
-  \item
-  \item
-  \item
-  \item
-  \item
-  \item
-\end{enumerate}
-
-## Question 4
-
-\begin{enumerate}[label=(\alph*)]
-  \item
-  \item
-  \item
-  \item
-  \item
-\end{enumerate}
-
-## Question 5
-
-\begin{enumerate}[label=(\alph*)]
-  \item
-  \item
-  \item
-  \item
-\end{enumerate}
-
-
 
 
