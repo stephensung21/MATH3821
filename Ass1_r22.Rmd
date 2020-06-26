@@ -91,6 +91,27 @@ set.seed(1234567)
 x = runif(1000)
 eps = rnorm(1000)
 y = 5 + 10*x + eps
+model <- y~x
+
+# nablaRSS <- function(b) c(-2 * sum(Sales - b[1] - b[2] * TV), -2 * sum((Sales - b[1] - b[2] * TV) * TV))
+# bn <- c(0, 0)
+# gamma <- 0.0000001 # step size parameter
+# kmax <- 1000000 ; for (k in 0:kmax) {
+# bnp1 <- bn - gamma * nablaRSS(bn)
+# if (k %% 100000 == 0)
+# { cat("b: ",bnp1, " -- RSS: ", RSS(bnp1[1], bnp1[2]), \n") }
+# bn <- bnp1
+# }
+
+#Gradient Descent 
+RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * x), -2 * sum((y - b[1] - b[2] * x) * x))
+bn <- c(0,0)
+gamma <- 0.00001
+kmax <- 1000000
+for (k in 0:kmax) {
+   bnp1 <- bn - gamma * RSS(bn)
+   bn <- bnp1
+}
 ```
 
 f)
@@ -141,8 +162,7 @@ d) Given the link function:
   \end{align*}
 e) 
 ```{r}
-curve(exp(1+x)/(1+exp(1+x)), xlim = c(-5, 5), ylim = c(0, 1), main=expression(paste("Sampled values, ", mu, "=5, ", sigma,
-    "=1")))
+curve(exp(1+x)/(1+exp(1+x)), xlim = c(-5, 5), ylim = c(0, 1), main=expression(paste("Graph of", log(pi/1-pi))))
 ```
 It shows the log odds of the insecticide working with a given probability?
 
@@ -152,4 +172,7 @@ f) The following probability density function:
   \end{align*}
   is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family.
 
+## Question 3
 
+a)
+  
