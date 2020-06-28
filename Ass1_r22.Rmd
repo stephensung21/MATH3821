@@ -35,7 +35,7 @@ c) To find the closed form formula of the LSE,
     &-2 \sum_{i=1}^{n} (y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x}))) = 0 \\
     &\sum_{i=1}^{n} y_i - \sum_{i=1}^{n} \hat{\alpha_i} - \sum_{i=1}^{n} \hat{\beta_1}x_i + \sum_{i=1}^{n} \hat{\beta_1}\bar{x} = 0 \\
    & n \hat{\alpha_i} = \sum_{i=1}^{n} y_i - \hat{\beta_1} \sum_{i=1}^{n}x_i + n\hat{\beta_1}\bar{x} \\
-    &\hat{\alpha_i} = \frac{1}{n}\sum_{i=1}^{n} y_i -\hat{\beta_1}\bar{x}+\hat{\beta_1}\bar{x} \\
+    &\hat{\alpha_i} = \frac{1x}{n}\sum_{i=1}^{n} y_i -\hat{\beta_1}\bar{x}+\hat{\beta_1}\bar{x} \\
     &\hat{\alpha_i} = \bar{y}
   \end{align*}
   Let Equation $(2) = 0$ 
@@ -175,4 +175,45 @@ f) The following probability density function:
 ## Question 3
 
 a)
+```{r}
+titanic <- read.table('titanic.txt', header=TRUE)
+head(titanic)
+```
+
+```{r}
+summary(titanic)
+```
+
+
+b)
+```{r}
+attach(titanic)
+table(titanic$Sex)
+```
+```{r}
+tapply(titanic$Survived,titanic$Sex,mean)
+```
+
+```{r}
+summary(lm(titanic$Survived~titanic$Sex))
+```
+
+c)
+```{r}
+titanic.glm <- glm(titanic$Survived~titanic$Age,family=binomial('logit'))
+summary(titanic.glm)
+1```
+
+
+d)
+
+e)
+
+f)
+
+h)
+
+i)
+
+j)
   
