@@ -202,7 +202,14 @@ c)
 ```{r}
 titanic.glm <- glm(titanic$Survived~titanic$Age,family=binomial('logit'))
 summary(titanic.glm)
-1```
+```
+
+```{r}
+exp(titanic.glm$coefficients[2])
+```
+```{r}
+exp(titanic.glm$coefficients[2])
+```
 
 
 d)
