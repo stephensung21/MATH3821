@@ -22,7 +22,7 @@ For Simple Linear Regression model $y_i=\beta_0+\beta_1 x_i + \epsilon_i$ where 
 
 a) Let $\beta_0 = \alpha - \beta_1 \bar{x}$. Then the SLR model can be expressed as $y_i=\alpha+\beta_1(x_i-\bar{x})+\epsilon_i$.
 
-b) $\alpha$ is the intercept of the new model?
+b) $\alpha$ equivalent to the mean response ($\alpha=\beta_0+\beta_1 \bar{x}$) of the previous SLR model and is the intercept of the new model
 
 c) To find the closed form formula of the LSE,
 \begin{align}
@@ -92,27 +92,40 @@ x = runif(1000)
 eps = rnorm(1000)
 y = 5 + 10*x + eps
 model <- y~x
-
-# nablaRSS <- function(b) c(-2 * sum(Sales - b[1] - b[2] * TV), -2 * sum((Sales - b[1] - b[2] * TV) * TV))
-# bn <- c(0, 0)
-# gamma <- 0.0000001 # step size parameter
-# kmax <- 1000000 ; for (k in 0:kmax) {
-# bnp1 <- bn - gamma * nablaRSS(bn)
-# if (k %% 100000 == 0)
-# { cat("b: ",bnp1, " -- RSS: ", RSS(bnp1[1], bnp1[2]), \n") }
-# bn <- bnp1
-# }
-
-#Gradient Descent 
 RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * x), -2 * sum((y - b[1] - b[2] * x) * x))
+#This function gives us the gradient of the RSS
 bn <- c(0,0)
 gamma <- 0.00001
-kmax <- 1000000
+kmax <- 100000
+
 for (k in 0:kmax) {
-   bnp1 <- bn - gamma * RSS(bn)
-   bn <- bnp1
+  bnp1 <- bn - gamma*RSS(bn)
+  if(sum(RSS(bn)^2) <= 0.00001){
+    cat("b: ", bnp1, "-- RSS:", RSS(c(bnp1[1],bnp1[2])),"\n","Iterations:",k,"\n")
+    break
+    }
+  bn <- bnp1
 }
+#This algorithm starts at b0 = 0 and b1 = 0 which is the same as alpha = 0 and b1 = 0
+#I get the l2 norm of score since the RSS function gives the gradient which is the score
+#thus the sum of squares of gradient (RSS) must b less than 0.00001
+#alpha from minimisation
+bnp1[1]+bnp1[2]*mean(x)
+#Using the closed form formula in c) we find alpha
+mean(y)
+#Finding beta
+bnp1[2]
+sum(((y-mean(y))*(x-mean(x)))/(sum((x-mean(x))^2)))
+#We can see that alpha has the same value as does the beta
+#about 9943 iterations were required 
+#Below is my working to find the gradient function for the RSS
 ```
+
+To get the gradient of the RSS we must get the first derivative of:
+\begin{align*}
+    S(\beta_1,\beta_2) &= \sum_{i=1}^n(y_i-\beta_1-\beta_2x_i)^2\\
+    S'(\beta_1,\beta_2) &= (-2\sum_{i=1}^n(y_i-\beta_1-\beta_2x_i),-2\sum_{i=1}^nx_i(y_i-\beta_1-\beta_2x_i))\\
+\end{align*}
 
 f)
 
