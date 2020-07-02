@@ -141,6 +141,8 @@ abline(bnp1[1]-bnp1[1]*mean(x),bnp1[2], col = 'blue')
 legend(0,16,legend=c("linear model", "gradient descent method"),
        col=c("red", "blue"), lty=1:2, cex=0.8)
 ```
+Note that the lines overlap due to both methods achieving the same result
+
 
 g)
 ```{r}
