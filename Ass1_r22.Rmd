@@ -28,7 +28,7 @@ c) To find the closed form formula of the LSE,
 \begin{align}
     RSS(\beta_1) &= \sum_{i=1}^{n} [y_i-(\alpha+\beta_1(x_i-\bar{x}))]^2 \nonumber \\
     \frac{\text{d}RSS(\beta_1)}{\text{d}\alpha} &= -2 \sum_{i=1}^{n} (y_i-(\alpha+\beta_1(x_i-\bar{x})))\\
-    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n}   \left(y_i-(\alpha+\beta_1(x_i-\bar{x}))(x_i -\bar{x})\right)  
+    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n}   \left(y_i-(\alpha+\beta_1(x_i-\bar{x})))(x_i -\bar{x})\right)  
   \end{align}
   Let Equation $(1) = 0$
   \begin{align*}
@@ -40,7 +40,7 @@ c) To find the closed form formula of the LSE,
   \end{align*}
   Let Equation $(2) = 0$ 
   \begin{align*}
-    &-2 \sum_{i=1}^{n} \left(y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x}))(x_i -\bar{x})\right) = 0 \\
+    &-2 \sum_{i=1}^{n} \left(y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x})))(x_i -\bar{x})\right) = 0 \\
     &\sum_{i=1}^{n} y_i(x_i-\bar{x})-\sum_{i=1}^{n}\hat{\alpha}(x_i-\bar{x}) -\sum_{i=1}^{n} \hat{\beta_1}(x_i-\bar{x})^2 = 0 \\
     &\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})^2 = \sum_{i=1}^{n} (y_i-\hat{\alpha})(x_i-\bar{x}) \\ \intertext{since $\hat{\alpha} = \bar{y}$}
     &\hat{\beta_1} = \frac{\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}
