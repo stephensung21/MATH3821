@@ -1,6 +1,6 @@
 ---
 title: "MATH3821 Assignment 1"
-author: "Stephen Sung"
+author: "Kevin Li, Kevin Lou, Stephen Sung, Brandon Wong, Jason Zhu"
 output: pdf_document
 header-includes:
   - \usepackage{enumitem}
@@ -92,7 +92,7 @@ x = runif(1000)
 eps = rnorm(1000)
 y = 5 + 10*x + eps
 model <- y~x
-RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * x), -2 * sum((y - b[1] - b[2] * x) * x))
+RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * (x-mean(x))), -2 * sum((y - b[1] - b[2] * (x-mean(x))) * (x-mean(x))))
 #This function gives us the gradient of the RSS
 bn <- c(0,0)
 gamma <- 0.00001
@@ -101,24 +101,28 @@ kmax <- 100000
 for (k in 0:kmax) {
   bnp1 <- bn - gamma*RSS(bn)
   if(sum(RSS(bn)^2) <= 0.00001){
-    cat("b: ", bnp1, "-- RSS:", RSS(c(bnp1[1],bnp1[2])),"\n","Iterations:",k,"\n")
+    cat("b(alpha, beta): ", bnp1, "-- RSS:", RSS(c(bnp1[1],bnp1[2])),"\n","Iterations:",k,"\n")
     break
-    }
+  }
   bn <- bnp1
 }
-#This algorithm starts at b0 = 0 and b1 = 0 which is the same as alpha = 0 and b1 = 0
+#This algorithm starts at alpha = 0 and b1 = 0
 #I get the l2 norm of score since the RSS function gives the gradient which is the score
 #thus the sum of squares of gradient (RSS) must b less than 0.00001
 #alpha from minimisation
-bnp1[1]+bnp1[2]*mean(x)
+print('Alpha from minimisation')
+bnp1[1]
 #Using the closed form formula in c) we find alpha
+print('Alpha from the closed form formula in 1c')
 mean(y)
 #Finding beta
+print('Beta from minimisation')
 bnp1[2]
+print('Beta from the closed form formula in 1c')
 sum(((y-mean(y))*(x-mean(x)))/(sum((x-mean(x))^2)))
 #We can see that alpha has the same value as does the beta
-#about 9943 iterations were required 
-#Below is my working to find the gradient function for the RSS
+#about 8218 iterations were required 
+#Below is the working to find the gradient function for the RSS
 ```
 
 To get the gradient of the RSS we must get the first derivative of:
@@ -128,8 +132,60 @@ To get the gradient of the RSS we must get the first derivative of:
 \end{align*}
 
 f)
+```{r}
+plot(x,y)
+lm = lm(y~x)
+abline(lm, col = "red")
+abline(bnp1[1]-bnp1[1]*mean(x),bnp1[2], col = 'blue')
+legend(0,16,legend=c("linear model", "gradient descent method"),
+       col=c("red", "blue"), lty=1:2, cex=0.8)
+```
 
 g)
+```{r}
+beta = c(0,0)
+imax = 100000
+RSShess = function(b)cbind(c(2*length(x), 2*sum(x-mean(x))),c(2*sum(x-mean(x)),2*sum((x-mean(x))^2)))
+#This function gives us the hessian matrix for the RSS
+
+for (i in 0:imax) {
+  beta1 <- beta - solve(RSShess(beta))%*%RSS(beta)
+  if(sum(RSS(beta)^2) <= 0.00001){
+    cat("beta: ", beta1, "-- RSS:", RSS(c(beta1[1],beta1[2])),"\n","Iterations:",i,"\n")
+    break
+  }
+  beta <- beta1
+}
+
+#alpha from NR
+print('Alpha from Newton-Raphson')
+beta1[1]
+#Using the closed form formula in c) we find alpha
+print('Alpha from closed form formula in 1c')
+mean(y)
+#Finding beta
+print('Beta from Newton-Raphson')
+beta1[2]
+print('Beta from closed form formula')
+sum(((y-mean(y))*(x-mean(x)))/(sum((x-mean(x))^2)))
+#We can see that values are the same 
+#1 iterations was required
+#It took alot less iterations than the gradient descent method
+#This could be due to the fact that the Newton-raphson method
+#accounts for the curvature of the loglikelihood and as such should need less iterations
+#Below is the working to find the hessian matrix for the RSS
+```
+To get the Hessian matrix of the RSS we need to further derive the gradient found in Question 1e with respect to $\alpha$ and $\beta_1$.\
+\begin{align*}
+    S'(\alpha,\beta_1) &= (-2\sum_{i=1}^n(y_i-\alpha-\beta_1(x_i-\bar x)),-2\sum_{i=1}^n(x_i-\bar x)(y_i-\alpha-\beta_1(x_i-\bar x)))\\
+    \frac{\partial^2S(\alpha,\beta_1)}{\partial\alpha^2} &= 2\sum_{i=1}^n1\\
+    &= 2n\\
+    \frac{\partial^2S(\alpha,\beta_1)}{\partial\beta_1^2} &= 2\sum_{i=1}^n(x_i-\bar x)(x_i-\bar x)\\
+    &= 2\sum_{i=1}^n(x_i-\bar x)^2\\
+    \frac{\partial^2S(\alpha,\beta_1)}{\partial\alpha\partial\beta_1} &= 2\sum_{i=1}^n(x_i-\bar x)\\
+    &= \frac{\partial^2S(\alpha,\beta_1)}{\partial\beta_1\partial\alpha}\\
+\end{align*}
+
   
 ## Question 2
 Given \textit{n} independent binary random variables $Y_1 \cdots Y_n$ with
@@ -187,55 +243,4 @@ f) The following probability density function:
   \end{align*}
   is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family.
 
-## Question 3
-
-a)
-```{r}
-titanic <- read.table('titanic.txt', header=TRUE)
-head(titanic)
-```
-
-```{r}
-summary(titanic)
-```
-
-
-b)
-```{r}
-attach(titanic)
-table(titanic$Sex)
-```
-```{r}
-tapply(titanic$Survived,titanic$Sex,mean)
-```
-
-```{r}
-summary(lm(titanic$Survived~titanic$Sex))
-```
-
-c)
-```{r}
-titanic.glm <- glm(titanic$Survived~titanic$Age,family=binomial('logit'))
-summary(titanic.glm)
-```
-
-```{r}
-exp(titanic.glm$coefficients[2])
-```
-```{r}
-exp(titanic.glm$coefficients[2])
-```
-
-
-d)
-
-e)
-
-f)
-
-h)
-
-i)
-
-j)
   
