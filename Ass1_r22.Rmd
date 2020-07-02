@@ -94,7 +94,7 @@ y = 5 + 10*x + eps
 model <- y~x
 RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * (x-mean(x))), -2 * sum((y - b[1] - b[2] * (x-mean(x))) 
                                                                        * (x-mean(x))))
-#This function gives us the gradient of the RSS
+#This function gives us the gradient of the RSS, based off lecture slide code
 bn <- c(0,0)
 gamma <- 0.00001
 kmax <- 100000
