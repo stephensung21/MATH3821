@@ -236,7 +236,7 @@ curve(exp(1+x)/(1+exp(1+x)), xlim = c(-5, 5), ylim = c(0, 1),
       main=expression(paste("Graph of ", log(pi/1-pi),'=',x^{T},beta,'=',beta[1]+beta[2],'x'))
       )
 ```
-It shows the log odds of the insecticide working with a given probability?
+It shows the log odds of the insecticide working with a given probability.
 
 f) The following probability density function:
 \begin{align*}
