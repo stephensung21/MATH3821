@@ -92,7 +92,8 @@ x = runif(1000)
 eps = rnorm(1000)
 y = 5 + 10*x + eps
 model <- y~x
-RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * (x-mean(x))), -2 * sum((y - b[1] - b[2] * (x-mean(x))) * (x-mean(x))))
+RSS <- function(b) c(-2 * sum(y - b[1] - b[2] * (x-mean(x))), -2 * sum((y - b[1] - b[2] * (x-mean(x))) 
+                                                                       * (x-mean(x))))
 #This function gives us the gradient of the RSS
 bn <- c(0,0)
 gamma <- 0.00001
