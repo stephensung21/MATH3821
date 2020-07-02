@@ -27,16 +27,16 @@ b) $\alpha$ equivalent to the mean response ($\alpha=\beta_0+\beta_1 \bar{x}$) o
 c) To find the closed form formula of the LSE,
 \begin{align}
     RSS(\beta_1) &= \sum_{i=1}^{n} [y_i-(\alpha+\beta_1(x_i-\bar{x}))]^2 \nonumber \\
-    \frac{\text{d}RSS(\beta_1)}{\text{d}\alpha} &= -2 \sum_{i=1}^{n} (y_i-(\alpha+\beta_1(x_i-\bar{x})))\\
-    \frac{\text{d}RSS(\beta_1)}{\text{d}\beta_1} &= -2 \sum_{i=1}^{n}   \left(y_i-(\alpha+\beta_1(x_i-\bar{x})))(x_i -\bar{x})\right)  
+    \frac{\partial RSS(\beta_1)}{\partial \alpha} &= -2 \sum_{i=1}^{n} (y_i-(\alpha+\beta_1(x_i-\bar{x})))\\
+    \frac{\partial RSS(\beta_1)}{\partial \beta_1} &= -2 \sum_{i=1}^{n}   \left(y_i-(\alpha+\beta_1(x_i-\bar{x})))(x_i -\bar{x})\right)  
   \end{align}
   Let Equation $(1) = 0$
   \begin{align*}
     &-2 \sum_{i=1}^{n} (y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x}))) = 0 \\
-    &\sum_{i=1}^{n} y_i - \sum_{i=1}^{n} \hat{\alpha_i} - \sum_{i=1}^{n} \hat{\beta_1}x_i + \sum_{i=1}^{n} \hat{\beta_1}\bar{x} = 0 \\
-   & n \hat{\alpha_i} = \sum_{i=1}^{n} y_i - \hat{\beta_1} \sum_{i=1}^{n}x_i + n\hat{\beta_1}\bar{x} \\
-    &\hat{\alpha_i} = \frac{1}{n}\sum_{i=1}^{n} y_i -\hat{\beta_1}\bar{x}+\hat{\beta_1}\bar{x} \\
-    &\hat{\alpha_i} = \bar{y}
+    &\sum_{i=1}^{n} y_i - \sum_{i=1}^{n} \hat{\alpha} - \sum_{i=1}^{n} \hat{\beta_1}x_i + \sum_{i=1}^{n} \hat{\beta_1}\bar{x} = 0 \\
+   & n \hat{\alpha} = \sum_{i=1}^{n} y_i - \hat{\beta_1} \sum_{i=1}^{n}x_i + n\hat{\beta_1}\bar{x} \\
+    &\hat{\alpha} = \frac{1}{n}\sum_{i=1}^{n} y_i -\hat{\beta_1}\bar{x}+\hat{\beta_1}\bar{x} \\
+    &\hat{\alpha} = \bar{y}
   \end{align*}
   Let Equation $(2) = 0$ 
   \begin{align*}
@@ -65,7 +65,7 @@ d)
   To calculate $Var[\hat{\beta_1}]$,
   \begin{align*}
     Var[\hat{\beta_1}]&=Var\left[\frac{\sum_{i=1}^{n} (x_i-\bar{x})y_i}{\sum_{i=1}^{n} (x_i-\bar{x})^2}\right] \\
-    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2} Var\left[\sum_{i=1}^{n}(x_i-\bar{x})y_i\right] \\
+    &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2} Var\left[\sum_{i=1}^{n}(x_i-\bar{x})y_i\right] \\ \intertext{Since all $y_i$ are independent}
     &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} Var\left[(x_i-\bar{x})y_i\right] \\
     &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} (x_i-\bar{x})^2 Var\left[y_i\right] \\
     &= \frac{1}{\left(\sum_{i=1}^{n} (x_i-\bar{x})^2\right)^2}\sum_{i=1}^{n} (x_i-\bar{x})^2 \sigma^2 \\
@@ -81,7 +81,7 @@ d)
     &= \frac{1}{S_{xx}}Cov\left[\frac{1}{n}\sum_{i=1}^{n}y_i,S_{xy}\right] \\
     &= \frac{1}{n S_{xx}}Cov\left[ \sum_{i=1}^{n} y_i, \sum_{j=1}^{n} (x_j-\bar{x})y_j)\right] \\
     &= \frac{1}{n S_{xx}} \sum_{i=1}^{n} \sum_{j=1}^{n} (x_j-\bar{x}) Cov[ y_i,y_j] \\ \intertext{When $i\ne j$, $Cov[y_i,y_j]=0$ since all $y_i$ are uncorrelated with each other, and $Cov[y_i,y_j]=Var[y_i]$ when $i = j$}
-    &= \frac{1}{n S_{xx}} \sum_{i=j}^{n} (x_i-\bar{x}) \sigma^2 \\
+    &= \frac{1}{n S_{xx}} \sum_{i=1}^{n} (x_i-\bar{x}) \sigma^2 \\
     &= 0
   \end{align*}
   
@@ -208,10 +208,10 @@ a) For a probability function to belong to the exponential family of distributio
   \end{align*}
   For the given probability density function:
   \begin{align*}
-    f(y;\pi) &= \pi_i^{y}(1-\pi_i)^{1-y} \\
-    &= \exp\left(\log\pi_i^{y}(1-\pi_i)^{1-y}\right) \\
-    &= \exp\left(\log\pi_i^{y}+\log(1-\pi_i)^{1-y})\right) \\
-    &= \exp\left(y\log\pi_i+(1-y)\log(1-\pi_i)\right) \\
+    f(y;\pi) &= \pi^{y}(1-\pi)^{1-y} \\
+    &= \exp\left(\log\pi^{y}(1-\pi)^{1-y}\right) \\
+    &= \exp\left(\log\pi^{y}+\log(1-\pi)^{1-y})\right) \\
+    &= \exp\left(y\log\pi+(1-y)\log(1-\pi)\right) \\
     &= \exp\left(y\log(\frac{\pi}{1-\pi})+\log(1-\pi)\right) \\
   \end{align*}
   With $p=1$ and $\phi=1$, the above equation follows the form of the exponential family of distribution where
@@ -238,12 +238,12 @@ curve(exp(1+x)/(1+exp(1+x)), xlim = c(-5, 5), ylim = c(0, 1),
       main=expression(paste("Graph of ", log(pi/1-pi),'=',x^{T},beta,'=',beta[1]+beta[2],'x'))
       )
 ```
-It shows the log odds of the insecticide working with a given probability.
+It shows the log odds of the insecticide working with a given probability, with increasing dosage increasing the probability of insecticide working.
 
 f) The following probability density function:
 \begin{align*}
     f(y;\theta)=\frac{1}{\phi}\exp\left(\frac{(y-\theta)}{\phi}-\exp\left[\frac{(y-\theta)}{\phi}\right]\right)
   \end{align*}
-  is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family. There is not a way to rearrange the probability density function such that it follows the form of a function in the exponential family, given in 2a.
+  is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family. There is not a way to rearrange the probability density function such that it follows the form of a function in the exponential family, given in 2a, as isolating $y$ from the inner exponential function is not possible and there is no $\theta$ component/naturalised parameter.
 
   
