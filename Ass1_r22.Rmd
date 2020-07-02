@@ -1,6 +1,6 @@
 ---
 title: "MATH3821 Assignment 1"
-author: "Kevin Li, Kevin Lou, Stephen Sung, Brandon Wong, Jason Zhu"
+author: "Kevin Li (z5206744), Kevin Lou (z5209822), Stephen Sung (z5208690), Brandon Wong (z5206828), Jason Zhu (z5204899)"
 output: pdf_document
 header-includes:
   - \usepackage{enumitem}
@@ -40,7 +40,7 @@ c) To find the closed form formula of the LSE,
   \end{align*}
   Let Equation $(2) = 0$ 
   \begin{align*}
-    &-2 \sum_{i=1}^{n} \left(y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x})))(x_i -\bar{x})\right) = 0 \\
+    &-2 \sum_{i=1}^{n} \left((y_i-(\hat{\alpha}+\hat{\beta_1}(x_i-\bar{x})))(x_i -\bar{x})\right) = 0 \\
     &\sum_{i=1}^{n} y_i(x_i-\bar{x})-\sum_{i=1}^{n}\hat{\alpha}(x_i-\bar{x}) -\sum_{i=1}^{n} \hat{\beta_1}(x_i-\bar{x})^2 = 0 \\
     &\hat{\beta_1} \sum_{i=1}^{n} (x_i-\bar{x})^2 = \sum_{i=1}^{n} (y_i-\hat{\alpha})(x_i-\bar{x}) \\ \intertext{since $\hat{\alpha} = \bar{y}$}
     &\hat{\beta_1} = \frac{\sum_{i=1}^{n} (y_i-\bar{y})(x_i-\bar{x})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}
@@ -246,4 +246,4 @@ f) The following probability density function:
   \end{align*}
   is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family. There is not a way to rearrange the probability density function such that it follows the form of a function in the exponential family, given in 2a, as isolating $y$ from the inner exponential function is not possible and there is no $\theta$ component/naturalised parameter.
 
-  
+
