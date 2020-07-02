@@ -242,6 +242,6 @@ f) The following probability density function:
 \begin{align*}
     f(y;\theta)=\frac{1}{\phi}\exp\left(\frac{(y-\theta)}{\phi}-\exp\left[\frac{(y-\theta)}{\phi}\right]\right)
   \end{align*}
-  is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family.
+  is NOT in the exponential family of distributions as it does not follow the form of a probability density function in the exponential family. There is not a way to rearrange the probability density function such that it follows the form of a function in the exponential family, given in 2a.
 
   
